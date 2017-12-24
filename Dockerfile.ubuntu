@@ -6,12 +6,25 @@ MAINTAINER sunil <sunhick@gmail.com>
 # RUN apt-get install -yq emacs
 # RUN apt-get install -yq gcc
 
-RUN mkdir -p /home/me
+# Install bazel
+RUN apt-get update
+RUN apt-get install -y openjdk-8-jdk
 
-ADD wait.sh /home/me/wait.sh
-RUN chmod +x /home/me/wait.sh
+RUN echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list
+RUN apt-get install -y curl
+RUN curl https://bazel.build/bazel-release.pub.gpg | apt-key add -
+
+RUN apt-get update
+RUN apt-get install -y bazel
+
+CMD ["bash"]
+
+#RUN mkdir -p /home/me
+
+#ADD wait.sh /home/me/wait.sh
+#RUN chmod +x /home/me/wait.sh
 
 # Attach a volume for persistant storage
-ADD . /home/mac
+# ADD . /home/mac
 
-CMD ["/home/me/wait.sh"]
+# CMD ["/home/me/wait.sh"]
