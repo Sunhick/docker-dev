@@ -1,4 +1,5 @@
 #!/bin/bash
 
 # sleep infinity
-tail -f /dev/null
+# tail -f /dev/null
+/bin/bash

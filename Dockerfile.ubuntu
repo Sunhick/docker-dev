@@ -1,0 +1,17 @@
+FROM ubuntu:16.04
+
+MAINTAINER sunil <sunhick@gmail.com>
+
+# RUN apt-get update -q
+# RUN apt-get install -yq emacs
+# RUN apt-get install -yq gcc
+
+RUN mkdir -p /home/me
+
+ADD wait.sh /home/me/wait.sh
+RUN chmod +x /home/me/wait.sh
+
+# Attach a volume for persistant storage
+ADD . /home/mac
+
+CMD ["/home/me/wait.sh"]
